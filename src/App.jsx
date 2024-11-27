@@ -1,12 +1,9 @@
+import React from "react";
+import AppRoutes from "./routes";
+import "../src/index.css";
 
-import './styles/global.css'
+const App = () => {
+  return <AppRoutes />;
+};
 
-function App() {
-  return (
-    <>
-    
-    </>
-  )
-}
-
-export default App
+export default App;
