@@ -31,7 +31,7 @@ function Navbar() {
 
   return (
     <motion.nav
-      className="bg-white dark:bg-gray-900 shadow-md fixed top-0 w-full z-50 transition-all duration-300 font-poppins"
+      className="bg-[#F8F8F8] dark:bg-[#1F2937] fixed top-0 w-full z-50 transition-all duration-300 font-poppins"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -83,13 +83,13 @@ function Navbar() {
               >
                 <Link
                   to="/cours/hard-skills"
-                  className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-blue-500 hover:text-white rounded transition-all duration-300"
+                  className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-[#1E3A8A] hover:text-white rounded transition-all duration-300"
                 >
                   Hard Skills
                 </Link>
                 <Link
                   to="/cours/soft-skills"
-                  className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-blue-500 hover:text-white rounded transition-all duration-300"
+                  className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-[#1E3A8A] hover:text-white rounded transition-all duration-300"
                 >
                   Soft Skills
                 </Link>
@@ -115,13 +115,13 @@ function Navbar() {
               >
                 <Link
                   to="/efm/regionaux"
-                  className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-blue-500 hover:text-white rounded transition-all duration-300"
+                  className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-[#1E3A8A] hover:text-white rounded transition-all duration-300"
                 >
                   Régionaux
                 </Link>
                 <Link
                   to="/efm/locaux"
-                  className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-blue-500 hover:text-white rounded transition-all duration-300"
+                  className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg[#1E3A8A] hover:text-white rounded transition-all duration-300"
                 >
                   Locaux
                 </Link>
@@ -132,7 +132,8 @@ function Navbar() {
           {/* Login Button */}
           <Button
             variant="outline"
-            className="text-blue-900 dark:text-gray-100 border-blue-900 hover:bg-blue-900 dark:hover:bg-blue-500 hover:text-white transition-all duration-300"
+            className="
+            text-blue-900 rounded-md dark:text-gray-100 border-[#1E3A8A] hover:bg-blue-900 dark:hover:bg-[#1E3A8A] hover:text-white transition-all duration-300"
           >
             Se Connecter
           </Button>
@@ -197,13 +198,13 @@ function Navbar() {
                 >
                   <Link
                     to="/cours/hard-skills"
-                    className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-blue-500 hover:text-white rounded transition-all duration-300"
+                    className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-[#1E3A8A] hover:text-white rounded transition-all duration-300"
                   >
                     Hard Skills
                   </Link>
                   <Link
                     to="/cours/soft-skills"
-                    className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-blue-500 hover:text-white rounded transition-all duration-300"
+                    className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-[#1E3A8A] hover:text-white rounded transition-all duration-300"
                   >
                     Soft Skills
                   </Link>
@@ -227,13 +228,13 @@ function Navbar() {
                 >
                   <Link
                     to="/efm/regionaux"
-                    className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-blue-500 hover:text-white rounded transition-all duration-300"
+                    className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-[#1E3A8A] hover:text-white rounded transition-all duration-300"
                   >
                     Régionaux
                   </Link>
                   <Link
                     to="/efm/locaux"
-                    className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-blue-500 hover:text-white rounded transition-all duration-300"
+                    className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-[#1E3A8A] hover:text-white rounded transition-all duration-300"
                   >
                     Locaux
                   </Link>
@@ -242,7 +243,7 @@ function Navbar() {
             </div>
             <Button
               variant="primary"
-              className="px-5 py-3 rounded-full bg-blue-900 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white shadow-md"
+              className="px-5 py-3 rounded-full bg-[#1E3A8A] dark:bg-blue-500 hover:bg-[#1E3A8A] dark:hover:bg-blue-600 text-white shadow-md"
             >
               Se Connecter
             </Button>
