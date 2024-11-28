@@ -243,7 +243,7 @@ function Navbar() {
             </div>
             <Button
               variant="primary"
-              className="px-5 py-3 rounded-full bg-[#1E3A8A] dark:bg-blue-500 hover:bg-[#1E3A8A] dark:hover:bg-blue-600 text-white shadow-md"
+              className="px-5 py-3 rounded-md bg-[#1E3A8A] dark:bg-blue-500 hover:bg-[#1E3A8A] dark:hover:bg-blue-600 text-white shadow-md"
             >
               Se Connecter
             </Button>

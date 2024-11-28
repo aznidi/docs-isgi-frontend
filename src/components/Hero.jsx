@@ -66,7 +66,7 @@ function Hero() {
         </div>
 
         <button
-          class="mt-5 px-9 py-2 text-1xl font-poppins cursor-pointer bg-blue-800 rounded-md text-white font-semibold transition duration-300 ease-in-out hover:bg-blue-900 hover:ring-2 hover:ring-violet-800 hover:shadow-xl hover:shadow-blue-900 focus:ring-blue-500 focus:shadow-blue-800"
+          className="mt-5 px-9 py-2 text-1xl font-poppins cursor-pointer bg-blue-800 rounded-md text-white font-semibold transition duration-300 ease-in-out hover:bg-blue-900 hover:ring-2 hover:ring-violet-800 hover:shadow-xl hover:shadow-blue-900 focus:ring-blue-500 focus:shadow-blue-800"
         >
           Rechercher
         </button>
