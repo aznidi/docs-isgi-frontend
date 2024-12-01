@@ -1,9 +1,10 @@
-import LoginForm from '@/components/LoginForm'
-import React from 'react'
+import LoginForm from '@/components/LoginForm';
+import React from 'react';
 
 function Login() {
   return (
-    <section className="relative isolate min-h-screen bg-[#F8F8F8] dark:bg-[#1F2937] flex flex-col items-center justify-center px-6 sm:px-8">
+    <section className="relative isolate min-h-screen flex items-center justify-center bg-[#F8F8F8] dark:bg-[#1F2937] px-4 sm:px-8 lg:px-16">
+      {/* Décoration arrière-plan */}
       <div
         aria-hidden="true"
         className="absolute inset-0 -z-10 transform-gpu overflow-hidden blur-3xl"
@@ -17,9 +18,12 @@ function Login() {
         />
       </div>
 
-          <LoginForm />
+      {/* Intégration du formulaire */}
+      <div className="w-full max-w-4xl overflow-hidden">
+        <LoginForm />
+      </div>
     </section>
-  )
+  );
 }
 
-export default Login
+export default Login;

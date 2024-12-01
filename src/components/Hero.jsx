@@ -65,11 +65,15 @@ function Hero() {
           />
         </div>
 
-        <button
-          className="mt-5 px-9 py-2 text-1xl font-poppins cursor-pointer bg-blue-800 rounded-md text-white font-semibold transition duration-300 ease-in-out hover:bg-blue-900 hover:ring-2 hover:ring-violet-800 hover:shadow-xl hover:shadow-blue-900 focus:ring-blue-500 focus:shadow-blue-800"
-        >
-          Rechercher
-        </button>
+        <motion.button
+        
+        className="mt-5 px-9 py-2 text-xl font-poppins cursor-pointer bg-blue-800 rounded-md text-white font-semibold transition duration-300 ease-in-out hover:bg-blue-900 hover:ring-2 hover:ring-blue-900 hover:shadow-xl hover:shadow-blue-900 focus:ring-blue-500 focus:shadow-blue-800"
+        initial={{ y: -20 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        Rechercher
+      </motion.button>
       </div>
     </section>
   );

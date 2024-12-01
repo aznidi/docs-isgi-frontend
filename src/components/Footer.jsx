@@ -5,7 +5,7 @@ import { FiMapPin } from "react-icons/fi";
 const Footer = () => {
   return (
     <motion.section
-      className="relative isolate min-h-[350px] bg-[#F8F8F8] dark:bg-[#1F2937] flex flex-col items-center justify-center px-6 sm:px-8 py-10"
+      className="relative isolate min-h-[400px] bg-[#F8F8F8] dark:bg-[#1F2937] flex flex-col items-center justify-center px-6 sm:px-8 py-10"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
@@ -29,7 +29,7 @@ const Footer = () => {
         <motion.img
           src="/public/ofppt.png"
           alt="Logo ISGI"
-          className="w-32 mx-auto mb-6"
+          className=" w-24 mx-auto mb-6"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1, delay: 0.3 }}
@@ -44,17 +44,6 @@ const Footer = () => {
         >
           Restez informé et rejoignez notre communauté !
         </motion.p>
-
-
-        {/* Header */}
-        <motion.h2
-          className="text-4xl sm:text-5xl md:text-6xl font-semibold text-[#1E3A8A] dark:text-[#FAFAFA] mb-6 font-poppins"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        >
-          Connectez-vous à ISGI
-        </motion.h2>
 
         {/* Social Media Links */}
         <div className="flex justify-center space-x-8 mb-6">
@@ -97,23 +86,27 @@ const Footer = () => {
         </div>
 
         {/* Contact Information */}
-        <div className="flex flex-wrap justify-between sm:space-x-12 mb-8">
-            <div className="text-center mb-4 sm:mb-0 w-full sm:w-auto">
-                <p className="text-sm font-poppins">Email: <a href="mailto:isgi@ofppt.ma" className="underline">isgi@ofppt.ma</a></p>
-                <p className="text-sm font-poppins">Téléphone: +212 5 22 22 22 22</p>
-            </div>
-            <div className="text-center w-full sm:w-auto">
-                <p className="text-sm font-poppins">
-                <FiMapPin className="inline-block mr-2" />
-                Rue de l'Innovation, ISGI, Rabat, Maroc
-                </p>
-            </div>
+        <div className="flex flex-wrap justify-center sm:space-x-12 mb-8">
+          <div className="text-center mb-4 sm:mb-0 w-full sm:w-auto ">
+            <p className="text-sm font-poppins">
+              Email:{" "}
+              <a href="mailto:isgi@ofppt.ma" className="underline">
+                isgi@ofppt.ma
+              </a>
+            </p>
+            <p className="text-sm font-poppins mt-1">Téléphone: +212 5 22 22 22 22</p>
+            <p className="text-sm font-poppins mt-1">
+              <FiMapPin className="inline-block mr-2" />
+              Rue de l'Innovation, ISGI, Rabat, Maroc
+            </p>
+          </div>
         </div>
-
 
         {/* ISGIHub Community Section */}
         <div className="mt-6 text-center">
-          <p className="text-sm font-poppins">Rejoignez notre communauté sur <strong>ISGIHub</strong></p>
+          <p className="text-sm font-poppins">
+            Rejoignez notre communauté sur <strong>ISGIHub</strong>
+          </p>
           <a
             href="https://www.isgihub.com"
             target="_blank"
@@ -131,12 +124,15 @@ const Footer = () => {
           transition={{ duration: 1 }}
         >
           <p className="text-sm font-poppins">
-            <a href="/privacy" className="text-blue-500 hover:underline">Politique de confidentialité</a> | 
-            <a href="/terms" className="text-blue-500 hover:underline"> Conditions d'utilisation</a>
+            <a href="/privacy" className="text-blue-500 hover:underline">
+              Politique de confidentialité
+            </a>{" "}
+            |{" "}
+            <a href="/terms" className="text-blue-500 hover:underline">
+              Conditions d'utilisation
+            </a>
           </p>
         </motion.div>
-
-        
 
         {/* Copyright */}
         <div className="mt-8 text-center text-sm sm:text-base font-poppins">
