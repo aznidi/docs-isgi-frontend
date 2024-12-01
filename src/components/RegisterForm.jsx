@@ -1,25 +1,43 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ClipLoader } from "react-spinners"; // Import du spinner
 import photo from "../assets/register.jpg";
+import { useAuth } from "@/contexts/authContext";
+import { doCreateUserWithEmailAndPassword } from "@/firebase/auth";
 
 const RegisterForm = () => {
+  const { userLoggedIn } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false); // État pour la soumission
+  const [firebaseError, setFirebaseError] = useState(""); // État pour stocker les erreurs Firebase
+
+  const translateFirebaseError = (errorCode) => {
+    switch (errorCode) {
+      case "auth/email-already-in-use":
+        return "Cette adresse e-mail est déjà utilisée.";
+      case "auth/invalid-email":
+        return "Veuillez entrer une adresse e-mail valide.";
+      case "auth/weak-password":
+        return "Le mot de passe doit contenir au moins 6 caractères.";
+      case "auth/user-not-found":
+        return "Aucun utilisateur trouvé avec ces identifiants.";
+      case "auth/wrong-password":
+        return "Le mot de passe est incorrect.";
+      default:
+        return "Une erreur inconnue est survenue. Veuillez réessayer.";
+    }
+  };
+  
 
   const formik = useFormik({
     initialValues: {
-      firstname: "",
-      surname: "",
       email: "",
       password: "",
       confirmPassword: "",
     },
     validationSchema: Yup.object({
-      firstname: Yup.string().required("Le prénom est obligatoire"),
-      surname: Yup.string().required("Le nom est obligatoire"),
       email: Yup.string()
         .email("Adresse e-mail invalide")
         .required("L'e-mail est obligatoire"),
@@ -31,18 +49,24 @@ const RegisterForm = () => {
         .required("La confirmation du mot de passe est obligatoire"),
     }),
     onSubmit: async (values) => {
-      setIsSubmitting(true); // Début de la soumission
-      console.log("Form values:", values);
-
-      // Simuler un délai (e.g., pour un appel API)
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-
-      // Fin de la soumission
-      setIsSubmitting(false);
+      setIsSubmitting(true);
+      setFirebaseError(""); // Réinitialiser les erreurs précédentes
+    
+      try {
+        await doCreateUserWithEmailAndPassword(values.email, values.password);
+      } catch (error) {
+        // Utiliser la fonction de traduction
+        const translatedError = translateFirebaseError(error.code);
+        setFirebaseError(translatedError); // Stocker le message traduit
+      } finally {
+        setIsSubmitting(false);
+      }
     },
   });
 
   return (
+    <>
+    {userLoggedIn && (<Navigate to={'/'} replace={true} />)}
     <motion.div
       className="relative isolate flex flex-col items-center justify-center w-full pt-8 font-poppins"
       initial={{ opacity: 0, x: -100 }}
@@ -70,6 +94,7 @@ const RegisterForm = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
         ></motion.div>
 
+
         {/* Section droite */}
         <motion.div
           className="lg:w-1/2 w-full p-6 sm:p-8 pt-8"
@@ -80,50 +105,15 @@ const RegisterForm = () => {
           <h2 className="text-2xl lg:text-4xl font-bold text-gray-800 dark:text-gray-200 mb-4">
             Inscrivez-vous
           </h2>
-          <form onSubmit={formik.handleSubmit}>
-            {/* Prénom */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4, delay: 0.4 }}
-              >
-                <input
-                  type="text"
-                  name="firstname"
-                  placeholder="Votre prénom"
-                  className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.firstname}
-                />
-                {formik.errors.firstname && formik.touched.firstname && (
-                  <p className="text-sm text-red-500 mt-1">
-                    {formik.errors.firstname}
-                  </p>
-                )}
-              </motion.div>
+          <p className="text-sm lg:text-base text-gray-600 dark:text-gray-400 mb-4">
+            Créez votre compte rapidement et facilement.
+          </p>
+          {/* Gérer les erreurs de Firebase */}
+          {firebaseError && (
+                <p className="text-sm text-red-500 mt-4 mb-4">{firebaseError}</p>
+              )}
 
-              {/* Nom */}
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4, delay: 0.5 }}
-              >
-                <input
-                  type="text"
-                  name="surname"
-                  placeholder="Votre nom"
-                  className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.surname}
-                />
-                {formik.errors.surname && formik.touched.surname && (
-                  <p className="text-sm text-red-500 mt-1">{formik.errors.surname}</p>
-                )}
-              </motion.div>
-            </div>
+          <form onSubmit={formik.handleSubmit}>
 
             {/* Email */}
             <motion.div
@@ -188,6 +178,9 @@ const RegisterForm = () => {
               )}
             </motion.div>
 
+            
+
+
             {/* Bouton d'inscription */}
             <motion.button
               type="submit"
@@ -216,7 +209,7 @@ const RegisterForm = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4, delay: 0.7 }}
-            className="text-sm text-center text-gray-500 mt-4"
+            className="text-sm text-start text-gray-500 mt-4"
           >
             Vous avez déjà un compte ? {" "}
             <Link to="/login" className="text-[#1c78c0] hover:text-[#166f98]">
@@ -226,6 +219,7 @@ const RegisterForm = () => {
         </motion.div>
       </motion.div>
     </motion.div>
+    </>
   );
 };
 

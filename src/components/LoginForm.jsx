@@ -1,13 +1,18 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ClipLoader } from "react-spinners"; // Import du spinner
 import photo from "../assets/login.jpg";
+import { doSignInWithEmailAndPassword } from "@/firebase/auth";
+import { useAuth } from "@/contexts/authContext";
 
 const LoginForm = () => {
+  const { userLoggedIn } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false); // État pour la soumission
+  const [firebaseError, setFirebaseError] = useState(""); // État pour les erreurs Firebase
+  
 
   const formik = useFormik({
     initialValues: {
@@ -23,18 +28,31 @@ const LoginForm = () => {
         .required("Le mot de passe est obligatoire"),
     }),
     onSubmit: async (values) => {
-      setIsSubmitting(true); // Début de la soumission
-      console.log("Form values:", values);
+      setIsSubmitting(true);
+      setFirebaseError(""); // Réinitialise l'erreur Firebase
 
-      // Simuler un délai (e.g., pour un appel API)
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-
-      // Fin de la soumission
-      setIsSubmitting(false);
+      try {
+        await doSignInWithEmailAndPassword(values.email, values.password);
+      } catch (error) {
+        // Gestion des erreurs Firebase
+        if (error.code === "auth/invalid-credential") {
+          setFirebaseError("Les identifiants fournis sont invalides.");
+        } else if (error.code === "auth/user-not-found") {
+          setFirebaseError("Utilisateur non trouvé. Veuillez vérifier vos informations.");
+        } else if (error.code === "auth/wrong-password") {
+          setFirebaseError("Mot de passe incorrect. Veuillez réessayer.");
+        } else {
+          setFirebaseError("Une erreur inattendue est survenue. Veuillez réessayer.");
+        }
+      } finally {
+        setIsSubmitting(false);
+      }
     },
   });
 
   return (
+    <>
+    {userLoggedIn && (<Navigate to={'/'} replace={true} />)}
     <motion.div
       className="flex flex-col lg:flex-row font-poppins"
       initial={{ opacity: 0, x: -100 }}
@@ -43,12 +61,14 @@ const LoginForm = () => {
     >
       {/* Section Image */}
       <motion.div
-        className="hidden lg:block lg:w-1/2 bg-cover bg-center rounded-md shadow-md"
+        className="hidden lg:block lg:w-1/2 w-full h-60 lg:h-auto bg-cover bg-center rounded-md shadow-md"
         style={{ backgroundImage: `url(${photo})` }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.2 }}
       ></motion.div>
+
+
 
       {/* Section Formulaire */}
       <motion.div
@@ -60,9 +80,21 @@ const LoginForm = () => {
         <h2 className="text-2xl lg:text-4xl font-bold text-gray-800 dark:text-gray-200 mb-4">
           Connexion
         </h2>
-        <p className="text-sm lg:text-base text-gray-600 dark:text-gray-400 mb-6">
+        <p className="text-sm lg:text-base text-gray-600 dark:text-gray-400 mb-4">
           Connectez-vous à votre compte.
         </p>
+
+        {firebaseError && (
+          <motion.p
+            className="text-sm text-red-500 mr-2 mt-2 mb-2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4 }}
+          >
+            {firebaseError}
+          </motion.p>
+        )}
+
 
         <form onSubmit={formik.handleSubmit} className="w-full max-w-sm">
           {/* Champ Email */}
@@ -153,7 +185,7 @@ const LoginForm = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.7 }}
-          className="text-sm text-center text-gray-500 mt-4"
+          className="text-sm text-center p-1 text-gray-500 mt-4"
         >
           Vous n'avez pas de compte ?{" "}
           <Link to="/register" className="text-[#1c78c0] hover:text-[#166f98]">
@@ -162,6 +194,7 @@ const LoginForm = () => {
         </motion.p>
       </motion.div>
     </motion.div>
+    </>
   );
 };
 

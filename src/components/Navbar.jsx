@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaBars, FaTimes, FaSun, FaMoon, FaChevronDown } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
+import { useAuth } from "@/contexts/authContext";
+import { doSignOut } from "@/firebase/auth";
 
 function Navbar() {
+  const navigate = useNavigate();
+  const { userLoggedIn } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
 
@@ -129,14 +133,56 @@ function Navbar() {
             )}
           </div>
 
-          {/* Login Button */}
-          <Button
-            variant="outline"
-            className="
-            text-blue-900 rounded-md dark:text-gray-100 border-[#1E3A8A] hover:bg-blue-900 dark:hover:bg-[#1E3A8A] hover:text-white transition-all duration-300"
-          >
-            Se Connecter
-          </Button>
+          {
+            userLoggedIn 
+              ?
+              <>
+                {/* Profile Button */}
+                <Link
+                  to="/profile"
+                  className="text-lg font-medium text-gray-800 dark:text-gray-100 hover:text-blue-900 dark:hover:text-blue-500 transition-all duration-300 relative"
+                >
+                  Profile
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-900 dark:bg-blue-500 transition-all duration-500 hover:w-full"></span>
+                </Link>
+          
+                {/* Logout Button */}
+                <Button
+                  variant="outline"
+                  onClick={() => 
+                    {doSignOut().then(() => {
+                       navigate('/')
+                      }) 
+                    }}
+                    className="
+                    text-red-900 rounded-md
+                    dark:text-red-100 border-red-900
+                    hover:bg-red-900 dark:hover:bg-red-700 
+                    hover:text-white transition-all duration-300
+                  "                  
+                >
+
+                    Déconnexion
+                </Button>
+              </>
+              :
+              <>
+                {/* Login Button */}
+              <Button
+                variant="outline"
+                onClick = {(() => navigate('/login'))}
+                className="
+                text-blue-900 rounded-md
+                dark:text-gray-100 border-[#1E3A8A] hover:bg-blue-900
+                  dark:hover:bg-[#1E3A8A] hover:text-white transition-all duration-300"
+                >
+               Se Connecter
+              </Button>
+              </>
+              
+
+
+          }
         </motion.div>
 
         {/* Dark Mode Toggle */}
