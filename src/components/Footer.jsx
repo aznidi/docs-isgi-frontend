@@ -10,10 +10,10 @@ const Footer = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      {/* Background Gradient */}
+      {/* Background Gradient with Blur effect */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 transform-gpu overflow-hidden blur-3xl"
+        className="absolute inset-0 -z-10 transform-gpu overflow-hidden blur-3xl backdrop-blur-lg"
       >
         <div
           style={{
