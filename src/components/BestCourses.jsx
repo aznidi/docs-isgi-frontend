@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FaDownload, FaFolderOpen, FaCalendarAlt, FaTag } from "react-icons/fa"; // Import des icônes
-import photo from "../assets/react.jpg";
+import photo from "../assets/react.png";
 import { Button } from "./ui/button";
 import { Download } from "lucide-react";
 
@@ -14,29 +14,30 @@ const BestCourses = () => {
   };
 
   return (
-    <motion.div
-      className="flex flex-col lg:flex-row font-poppins"
-      initial={{ opacity: 0, x: -100 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-    >
-      {/* Section Image */}
       <motion.div
-        className="lg:w-1/2 w-full min-h-full bg-cover bg-center rounded-md shadow-md"
-        style={{ backgroundImage: `url(${photo})` }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
+        className="flex flex-col lg:flex-row font-poppins bg-transparent backdrop-blur-md transition-all duration-300 ease-in-out hover:shadow-3xl hover:scale-105"
+        initial={{ opacity: 0, x: -100 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
       >
-        {/* Image pour mobile */}
-        <img
-          className="lg:hidden w-full h-full object-cover rounded-md"
-          src={photo}
-          alt="React Course"
-        />
-      </motion.div>
+        {/* Section Image */}
+        <motion.div
+          className="lg:w-1/2 w-full p-4 min-h-80 bg-cover bg-center mx-auto "
+          style={{ backgroundImage: `url(${photo})` }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          {/* Image pour mobile */}
+          <img
+            className="lg:hidden w-full h-full object-cover rounded-md"
+            src={photo}
+            alt="React Course"
+          />
+        </motion.div>
+
 
       {/* Section Formulaire */}
       <motion.div
@@ -45,7 +46,7 @@ const BestCourses = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
       >
-        <h2 className="text-2xl lg:text-4xl font-bold text-[#1E3A8A] dark:text-[#FAFAFA] mb-4 flex items-center gap-2">
+        <h2 className="text-2xl lg:text-4xl font-bold text-[#1E3A8A] dark:text-[#1E3A8A] mb-4 flex items-center gap-2">
           React JS
         </h2>
 

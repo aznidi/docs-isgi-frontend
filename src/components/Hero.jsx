@@ -14,45 +14,24 @@ function Hero() {
   const buttonRef = useRef(null);
   const inputRef = useRef(null);
 
+  const animateElements = () => {
+    const tl = gsap.timeline({ defaults: { duration: 1, ease: "power3.out" } });
+    tl.fromTo(heroRef.current, { opacity: 0, y: 100 }, { opacity: 1, y: 0 })
+      .fromTo(bgRef.current, { opacity: 0, y: 100 }, { opacity: 1, y: 0 }, "<")
+      .fromTo(titleRef.current, { opacity: 0, y: 100 }, { opacity: 1, y: 0 }, "<")
+      .fromTo(inputRef.current, { opacity: 0, y: 100 }, { opacity: 1, y: 0 }, "<")
+      .fromTo(buttonRef.current, { opacity: 0, y: 100 }, { opacity: 1, y: 0 }, "<");
+  };
+
   useEffect(() => {
-    // Animation d'entrée des éléments
-    gsap.fromTo(
-      heroRef.current,
-      { opacity: 0, y: 100 },
-      { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
-    );
-
-    gsap.fromTo(
-      bgRef.current,
-      { opacity: 0, y: 100 },
-      { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
-    );
-
-    gsap.fromTo(
-      titleRef.current,
-      { opacity: 0, y: 100 },
-      { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
-    );
-
-    gsap.fromTo(
-      inputRef.current,
-      { opacity: 0, y: 100 },
-      { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
-    );
-
-    gsap.fromTo(
-      buttonRef.current,
-      { opacity: 0, y: 100 },
-      { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
-    );
+    animateElements();
   }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentWord((prevWord) => {
         const currentIndex = phrases.indexOf(prevWord);
-        const nextIndex = (currentIndex + 1) % phrases.length;
-        return phrases[nextIndex];
+        return phrases[(currentIndex + 1) % phrases.length];
       });
 
       gsap.fromTo(
@@ -63,7 +42,7 @@ function Hero() {
     }, 4000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [phrases]);
 
   return (
     <>

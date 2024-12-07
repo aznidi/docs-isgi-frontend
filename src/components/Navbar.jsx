@@ -11,6 +11,7 @@ function Navbar() {
   const { userLoggedIn } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   // Toggle dark mode
   useEffect(() => {
@@ -20,6 +21,20 @@ function Navbar() {
       document.documentElement.classList.remove("dark");
     }
   }, [darkMode]);
+
+  // Handle scrolling
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Dropdown states
   const [dropdownOpen, setDropdownOpen] = useState({});
@@ -35,7 +50,11 @@ function Navbar() {
 
   return (
     <motion.nav
-      className="bg-transparent dark:bg-transparent fixed top-0 w-full z-50 transition-all duration-300 font-poppins"
+      className={`fixed top-0 w-full z-50 transition-all duration-300 font-poppins ${
+        scrolled
+          ? "backdrop-blur-lg bg-transparent dark:bg-transparent shadow-md"
+          : "bg-transparent dark:bg-transparent"
+      }`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -218,7 +237,7 @@ function Navbar() {
       {/* Mobile Navigation */}
       {menuOpen && (
         <motion.div
-          className="fixed inset-0 bg-black bg-opacity-50 dark:bg-gray-800 dark:bg-opacity-70 z-40"
+          className="fixed bg-transparent inset-0 bg-opacity-50 dark:bg-transparent backdrop-blur-lg shadow-md dark:bg-opacity-70 z-40"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
