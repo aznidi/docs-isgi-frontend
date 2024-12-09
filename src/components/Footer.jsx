@@ -136,7 +136,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="mt-8 text-center text-sm sm:text-base font-poppins">
-          <p>© 2024 ISGI. Tous droits réservés.(AZNIDI Salah)</p>
+          <p>© 2024 ISGI. Tous droits réservés.</p>
         </div>
       </div>
     </motion.section>

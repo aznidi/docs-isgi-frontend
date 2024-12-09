@@ -96,7 +96,7 @@ const BestCourses = () => {
           >
             <Button
               onClick={() => alert("Cours ouvert !")}
-              className="w-full px-9 py-2 text-lg font-poppins bg-white rounded-md
+              className="w-full px-9 py-2 text-lg font-poppins bg-[#F8F8F8] rounded-md
                text-black font-semibold transition duration-300 ease-in-out hover:bg-white
                hover:shadow-xl hover:shadow-blue-900 focus:ring-blue-500 focus:shadow-blue-800"
             >
