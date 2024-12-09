@@ -32,7 +32,12 @@ const LoginForm = () => {
       setFirebaseError(""); // Réinitialise l'erreur Firebase
 
       try {
-        await doSignInWithEmailAndPassword(values.email, values.password);
+        const userCredential = await doSignInWithEmailAndPassword(values.email, values.password);
+        const user = userCredential.user;
+
+        const token = await user.getIdToken();
+        console.log("Firebase Token :", token);
+
       } catch (error) {
         // Gestion des erreurs Firebase
         if (error.code === "auth/invalid-credential") {
