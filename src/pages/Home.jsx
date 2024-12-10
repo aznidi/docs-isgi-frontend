@@ -8,7 +8,8 @@ const Home = () => {
   return (
     <main className="relative isolate bg-[#F8F8F8] dark:bg-[#1F2937] overflow-hidden">
       {/* Section Hero */}
-      <section className="relative isolate min-h-screen flex flex-col items-center justify-center overflow-hidden">
+      <section className="relative isolate min-h-screen flex 
+      flex-col items-center justify-center overflow-hidden rounded-xl shadow-sm">
         <Hero />
       </section>
 

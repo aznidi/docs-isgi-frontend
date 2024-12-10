@@ -49,7 +49,7 @@ function Hero() {
       <div
         ref={bgRef}
         aria-hidden="true"
-        className="absolute inset-0 -z-10 transform-gpu overflow-hidden blur-3xl"
+        className="absolute inset-0 -z-10 transform-gpu overflow-hidden blur-3xl " 
       >
         <div
           style={{

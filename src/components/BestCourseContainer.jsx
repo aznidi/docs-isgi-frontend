@@ -6,7 +6,7 @@ import BestCourses from "@/components/BestCourses";
 function BestCourseContainer() {
   return (
     <motion.section
-      className="relative isolate min-h-80 bg-[#F8F8F8] dark:bg-[#1F2937] px-4 sm:px-8 lg:px-16"
+      className="relative isolate min-h-80 px-4 sm:px-8 lg:px-16"
       initial={{ opacity: 0 }}  // Initial opacity (invisible at first)
       whileInView={{ opacity: 1 }} // Fade in when it enters the view
       transition={{ opacity: { duration: 1 } }} // Smooth transition
@@ -27,12 +27,12 @@ function BestCourseContainer() {
       </div>
 
       {/* Titre séparé de la carte */}
-      <h1 className="mt-0 mb-14 text-center text-3xl sm:text-6xl md:text-4xl font-bold text-[#1E3A8A] dark:text-[#FAFAFA] font-poppins">
+      <h1 className="mt-3 mb-14 text-center text-3xl sm:text-6xl md:text-4xl font-bold text-[#1E3A8A] dark:text-[#FAFAFA] font-poppins">
         Le document le plus consulté cette semaine
       </h1>
 
       {/* Intégration du formulaire */}
-      <div className="w-full max-w-4xl bg-transparent overflow-hidden rounded-lg shadow-md border-b-4 border-transparent border-l-0 border-r-0 mx-auto">
+      <div className="w-full max-w-4xl bg-transparent overflow-hidden mx-auto">
         <BestCourses />
       </div>
       </motion.section>

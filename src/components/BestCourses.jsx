@@ -15,7 +15,10 @@ const BestCourses = () => {
 
   return (
       <motion.div
-        className="flex flex-col lg:flex-row font-poppins bg-transparent backdrop-blur-md transition-all duration-300 ease-in-out hover:shadow-3xl hover:scale-105"
+        className="flex flex-col lg:flex-row font-poppins
+         bg-transparent backdrop-blur-md transition-all duration-300 ease-in-out 
+         rounded-xl shadow-sm mb-12 p-3 border 
+         hover:shadow-3xl hover:scale-105"
         initial={{ opacity: 0, x: -100 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6 }}
