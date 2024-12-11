@@ -69,8 +69,8 @@ const Statistiques = () => {
             key={stat.id}
             className="stats-card flex flex-col items-center justify-center font-poppins 
             bg-transparent backdrop-blur-md transition-all duration-300 
-            text-blue-900 dark:text-[#F8F8F8] ease-in-out 
-            hover:shadow-3xl hover:scale-105 rounded-md shadow-md p-6"
+            text-blue-900 dark:text-[#F8F8F8] ease-in-out  cursor-pointer
+            hover:shadow-3xl hover:scale-105 rounded-md shadow-md p-6 hover:shadow-lg"
           >
             <div className="text-4xl mb-4">{stat.icon}</div>
             <h3 className="text-lg font-semibold">{stat.label}</h3>
@@ -82,6 +82,19 @@ const Statistiques = () => {
             </p>
           </motion.div>
         ))}
+        {/* Animation de dégradé en arrière-plan */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 transform-gpu overflow-hidden blur-3xl"
+      >
+        <div
+          style={{
+            clipPath:
+              "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
+          }}
+          className="relative left-[50%] aspect-[1500/900] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#1E3A8A] to-[#60A5FA] opacity-30 sm:w-[72.1875rem] animate-pulse"
+        />
+      </div>
       </div>
     </section>
   );

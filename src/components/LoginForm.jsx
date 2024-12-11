@@ -5,13 +5,12 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ClipLoader } from "react-spinners"; // Import du spinner
 import photo from "../assets/login.jpg";
-import { doSignInWithEmailAndPassword } from "@/firebase/auth";
-import { useAuth } from "@/contexts/authContext";
+import { login } from "@/services/authService";
 
 const LoginForm = () => {
-  const { userLoggedIn } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false); // État pour la soumission
-  const [firebaseError, setFirebaseError] = useState(""); // État pour les erreurs Firebase
+  const [apiError, setApiError] = useState(""); // État pour les erreurs de l'API
+  const [redirectToHome, setRedirectToHome] = useState(false); // État pour redirection après login
   
 
   const formik = useFormik({
@@ -29,25 +28,18 @@ const LoginForm = () => {
     }),
     onSubmit: async (values) => {
       setIsSubmitting(true);
-      setFirebaseError(""); // Réinitialise l'erreur Firebase
+      setApiError(""); // Réinitialise l'erreur de l'API
 
       try {
-        const userCredential = await doSignInWithEmailAndPassword(values.email, values.password);
-        const user = userCredential.user;
-
-        const token = await user.getIdToken();
-        console.log("Firebase Token :", token);
-
+        // Envoi des données au backend Laravel pour l'authentification
+        const data = await login(values.email,values.password);
+        setRedirectToHome(true);
       } catch (error) {
-        // Gestion des erreurs Firebase
-        if (error.code === "auth/invalid-credential") {
-          setFirebaseError("Les identifiants fournis sont invalides.");
-        } else if (error.code === "auth/user-not-found") {
-          setFirebaseError("Utilisateur non trouvé. Veuillez vérifier vos informations.");
-        } else if (error.code === "auth/wrong-password") {
-          setFirebaseError("Mot de passe incorrect. Veuillez réessayer.");
+        // Gestion des erreurs du backend
+        if (error.response && error.response.data) {
+          setApiError(error.response.data.message || "Erreur inconnue");
         } else {
-          setFirebaseError("Une erreur inattendue est survenue. Veuillez réessayer.");
+          setApiError("Erreur lors de la demande. Veuillez réessayer.");
         }
       } finally {
         setIsSubmitting(false);
@@ -55,9 +47,11 @@ const LoginForm = () => {
     },
   });
 
+  if (redirectToHome) {
+    return window.location.href = '/';
+  }
+
   return (
-    <>
-    {userLoggedIn && (<Navigate to={'/'} replace={true} />)}
     <motion.div
       className="flex flex-col lg:flex-row font-poppins"
       initial={{ opacity: 0, x: -100 }}
@@ -73,8 +67,6 @@ const LoginForm = () => {
         transition={{ duration: 0.6, delay: 0.2 }}
       ></motion.div>
 
-
-
       {/* Section Formulaire */}
       <motion.div
         className="lg:w-1/2 w-full p-6 sm:p-8 flex flex-col items-start"
@@ -89,17 +81,16 @@ const LoginForm = () => {
           Connectez-vous à votre compte.
         </p>
 
-        {firebaseError && (
+        {apiError && (
           <motion.p
             className="text-sm text-red-500 mr-2 mt-2 mb-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
           >
-            {firebaseError}
+            {apiError}
           </motion.p>
         )}
-
 
         <form onSubmit={formik.handleSubmit} className="w-full max-w-sm">
           {/* Champ Email */}
@@ -113,7 +104,7 @@ const LoginForm = () => {
               type="email"
               name="email"
               placeholder="Votre e-mail"
-              className={`border ${
+              className={`dark:text-blue-900 border ${
                 formik.errors.email && formik.touched.email
                   ? "border-red-500"
                   : "border-gray-300"
@@ -142,7 +133,7 @@ const LoginForm = () => {
               type="password"
               name="password"
               placeholder="Mot de passe"
-              className={`border ${
+              className={` dark:text-blue-900 border ${
                 formik.errors.password && formik.touched.password
                   ? "border-red-500"
                   : "border-gray-300"
@@ -156,28 +147,23 @@ const LoginForm = () => {
               value={formik.values.password}
             />
             {formik.errors.password && formik.touched.password && (
-              <p className="text-sm text-red-500 mt-1">
-                {formik.errors.password}
-              </p>
+              <p className="text-sm text-red-500 mt-1">{formik.errors.password}</p>
             )}
           </motion.div>
 
           {/* Bouton de soumission avec spinner */}
           <motion.button
             type="submit"
-            disabled={isSubmitting} // Désactiver le bouton pendant la soumission
+            disabled={isSubmitting}
             className={`w-full rounded-lg px-4 py-2 text-lg font-poppins cursor-pointer ${
               isSubmitting
-                ? "bg-blue-800 text-white hover:bg-blue-900 hover:ring-2 hover:ring-blue-900 hover:shadow-xl hover:shadow-blue-900 focus:ring-blue-500 focus:shadow-blue-800"
-                : "bg-blue-800 text-white hover:bg-blue-900 hover:ring-2 hover:ring-blue-900 hover:shadow-xl hover:shadow-blue-900 focus:ring-blue-500 focus:shadow-blue-800"
+                ? "bg-blue-800 text-white hover:bg-blue-900"
+                : "bg-blue-800 text-white hover:bg-blue-900"
             } transition duration-300 ease-in-out`}
-            initial={{ y: -20 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.6 }}
           >
-            {isSubmitting ? ( // Afficher le spinner au lieu du texte
+            {isSubmitting ? (
               <div className="flex justify-center items-center">
-                <ClipLoader size={26} color="#ffffff" /> {/* Spinner ici */}
+                <ClipLoader size={26} color="#ffffff" />
               </div>
             ) : (
               "Se connecter"
@@ -199,7 +185,6 @@ const LoginForm = () => {
         </motion.p>
       </motion.div>
     </motion.div>
-    </>
   );
 };
 
