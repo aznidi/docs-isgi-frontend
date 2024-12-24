@@ -37,7 +37,7 @@ const LoginForm = () => {
       } catch (error) {
         // Gestion des erreurs du backend
         if (error.response && error.response.data) {
-          setApiError(error.response.data.message || "Erreur inconnue");
+          setApiError("Connexion échouée. Veuillez vérifier vos informations." || "Erreur inconnue");
         } else {
           setApiError("Erreur lors de la demande. Veuillez réessayer.");
         }
@@ -111,7 +111,7 @@ const LoginForm = () => {
               } rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 ${
                 formik.errors.email && formik.touched.email
                   ? "focus:ring-red-500"
-                  : "focus:ring-blue-500"
+                  : "focus:ring-blue-900"
               }`}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -140,7 +140,7 @@ const LoginForm = () => {
               } rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 ${
                 formik.errors.password && formik.touched.password
                   ? "focus:ring-red-500"
-                  : "focus:ring-blue-500"
+                  : "focus:ring-blue-900"
               }`}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -156,10 +156,10 @@ const LoginForm = () => {
             type="submit"
             disabled={isSubmitting}
             className={`w-full rounded-lg px-4 py-2 text-lg font-poppins cursor-pointer ${
-              isSubmitting
-                ? "bg-blue-800 text-white hover:bg-blue-900"
-                : "bg-blue-800 text-white hover:bg-blue-900"
-            } transition duration-300 ease-in-out`}
+                  isSubmitting
+                    ? "bg-blue-800 text-white hover:bg-blue-900 hover:ring-2 hover:ring-blue-900 hover:shadow-xl hover:shadow-blue-900 focus:ring-blue-500 focus:shadow-blue-800"
+                    : "bg-blue-800 text-white hover:bg-blue-900 hover:ring-2 hover:ring-blue-900 hover:shadow-xl hover:shadow-blue-900 focus:ring-blue-500 focus:shadow-blue-800"
+                } transition duration-300 ease-in-out`}
           >
             {isSubmitting ? (
               <div className="flex justify-center items-center">

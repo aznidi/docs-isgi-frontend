@@ -1,7 +1,6 @@
-import React from 'react'
-import { motion } from 'framer-motion'
+import React from 'react';
+import { motion } from 'framer-motion';
 import BestCourses from "@/components/BestCourses";
-
 
 function BestCourseContainer() {
   return (
@@ -11,7 +10,7 @@ function BestCourseContainer() {
       whileInView={{ opacity: 1 }} // Fade in when it enters the view
       transition={{ opacity: { duration: 1 } }} // Smooth transition
       viewport={{ once: true }} // Trigger only once during scrolling
-      >
+    >
       {/* Décoration arrière-plan */}
       <div
         aria-hidden="true"
@@ -27,16 +26,30 @@ function BestCourseContainer() {
       </div>
 
       {/* Titre séparé de la carte */}
-      <h1 className="mt-3 mb-14 text-center text-3xl sm:text-6xl md:text-4xl font-bold text-[#1E3A8A] dark:text-[#FAFAFA] font-poppins">
+      <motion.h1
+        className="mt-3 mb-14 text-center text-3xl sm:text-6xl md:text-4xl font-bold text-[#1E3A8A] dark:text-[#FAFAFA] font-poppins"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+      >
         Le document le plus consulté cette semaine
-      </h1>
+      </motion.h1>
 
       {/* Intégration du formulaire */}
-      <div className="w-full max-w-4xl bg-transparent overflow-hidden mx-auto">
+      <motion.div
+        className="w-full max-w-4xl bg-transparent overflow-hidden mx-auto"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.2 }} // Décalage pour une transition fluide
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+      >
         <BestCourses />
-      </div>
-      </motion.section>
-  )
+      </motion.div>
+    </motion.section>
+  );
 }
 
-export default BestCourseContainer
+export default BestCourseContainer;

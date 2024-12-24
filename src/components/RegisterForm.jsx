@@ -130,7 +130,8 @@ const RegisterForm = () => {
                   type="text"
                   name="name"
                   placeholder="Votre nom"
-                  className="dark:text-blue-900 border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="dark:text-blue-900 border border-gray-300 rounded-lg 
+                  px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-900"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.name}
@@ -151,7 +152,8 @@ const RegisterForm = () => {
                   type="email"
                   name="email"
                   placeholder="Votre e-mail"
-                  className="dark:text-blue-900 border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="dark:text-blue-900 border border-gray-300 rounded-lg px-4 
+                  py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-900"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.email}
@@ -172,7 +174,8 @@ const RegisterForm = () => {
                   type="password"
                   name="password"
                   placeholder="Mot de passe"
-                  className="dark:text-blue-900 border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="dark:text-blue-900 border border-gray-300 rounded-lg
+                   px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-900"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.password}
@@ -193,7 +196,8 @@ const RegisterForm = () => {
                   type="password"
                   name="confirmPassword"
                   placeholder="Confirmez votre mot de passe"
-                  className="dark:text-blue-900 border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="dark:text-blue-900 border border-gray-300 rounded-lg px-4 py-2 
+                  w-full focus:outline-none focus:ring-2 focus:ring-blue-900"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.confirmPassword}

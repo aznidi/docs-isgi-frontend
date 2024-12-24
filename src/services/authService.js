@@ -1,26 +1,26 @@
 // src/api/authService.js
-import apiClient from "./index";
+import apiClient from "./index"; // axios client déjà configuré
 
-// Fonction de connexion
+// Connexion
 export const login = async (email, password) => {
-  const response = await apiClient.post("/login", { email, password });
-  localStorage.setItem("token", response.data.token); // Sauvegarder le token
-  return response.data; // Retourner les données reçues
+  const response = await apiClient.post("/auth/login", { email, password });
+  localStorage.setItem("token", response.data.token); // Sauvegarde du token
+  return response.data;
 };
 
-// Fonction d'inscription
+// Inscription
 export const register = async (name, email, password, confirmPassword) => {
-  const response = await apiClient.post("/register", {
+  const response = await apiClient.post("/auth/register", {
     name,
     email,
     password,
     password_confirmation: confirmPassword,
   });
-  return response.data; // Retourner les données reçues
+  return response.data;
 };
 
-// Fonction de déconnexion
+// Déconnexion
 export const logout = async () => {
-  await apiClient.post("/logout");
-  localStorage.removeItem("token"); // Supprimer le token
+  await apiClient.post("/auth/logout");
+  localStorage.removeItem("token"); // Suppression du token
 };

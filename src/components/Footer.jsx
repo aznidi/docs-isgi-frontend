@@ -105,34 +105,9 @@ const Footer = () => {
         {/* ISGIHub Community Section */}
         <div className="mt-6 text-center">
           <p className="text-sm font-poppins">
-            Rejoignez notre communauté sur <strong>ISGIHub</strong>
+            Rejoignez notre communauté sur <strong><a href="http://isgi.ma/">ISGIHub</a></strong>
           </p>
-          <a
-            href="https://www.isgihub.com"
-            target="_blank"
-            className="font-poppins text-lg font-semibold hover:underline"
-          >
-            Visitez ISGIHub
-          </a>
         </div>
-
-        {/* Privacy Policy & Useful Links */}
-        <motion.div
-          className="mt-6 text-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        >
-          <p className="text-sm font-poppins">
-            <a href="/privacy" className="text-blue-500 hover:underline">
-              Politique de confidentialité
-            </a>{" "}
-            |{" "}
-            <a href="/terms" className="text-blue-500 hover:underline">
-              Conditions d'utilisation
-            </a>
-          </p>
-        </motion.div>
 
         {/* Copyright */}
         <div className="mt-8 text-center text-sm sm:text-base font-poppins">

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "framer-motion"; // Importation pour les animations
 import { FaDownload, FaFolderOpen, FaCalendarAlt, FaTag } from "react-icons/fa"; // Import des icônes
 import photo from "../assets/react.png";
 import { Button } from "./ui/button";
@@ -14,40 +14,43 @@ const BestCourses = () => {
   };
 
   return (
+    <motion.div
+      className="flex flex-col lg:flex-row font-poppins
+       bg-transparent backdrop-blur-md transition-all duration-300 ease-in-out 
+       rounded-md shadow-sm mb-12 p-3 
+       hover:shadow-md hover:scale-105"
+      initial={{ opacity: 0, x: -100 }} // Début de l'animation avec opacité 0 et décalage horizontal
+      animate={{ opacity: 1, x: 0 }} // Lorsque l'élément devient visible, il devient opaque et sans décalage
+      transition={{ duration: 0.6 }}
+      whileInView={{ opacity: 1, x: 0 }} // Animation lorsque l'élément entre dans la vue
+      viewport={{ once: true }} // L'animation ne se déclenche qu'une fois lors du scroll
+    >
+      {/* Section Image */}
       <motion.div
-        className="flex flex-col lg:flex-row font-poppins
-         bg-transparent backdrop-blur-md transition-all duration-300 ease-in-out 
-         rounded-md shadow-sm mb-12 p-3 
-         hover:shadow-md hover:scale-105"
-        initial={{ opacity: 0, x: -100 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.6 }}
-        whileInView={{ opacity: 1, x: 0 }}
+        className="lg:w-1/2 w-full p-4 min-h-80 bg-cover bg-center mx-auto"
+        style={{ backgroundImage: `url(${photo})` }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
       >
-        {/* Section Image */}
-        <motion.div
-          className="lg:w-1/2 w-full p-4 min-h-80 bg-cover bg-center mx-auto "
-          style={{ backgroundImage: `url(${photo})` }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          {/* Image pour mobile */}
-          <img
-            className="lg:hidden w-full h-full object-cover rounded-md"
-            src={photo}
-            alt="React Course"
-          />
-        </motion.div>
-
+        {/* Image pour mobile */}
+        <img
+          className="lg:hidden w-full h-full object-cover rounded-md"
+          src={photo}
+          alt="React Course"
+        />
+      </motion.div>
 
       {/* Section Formulaire */}
       <motion.div
         className="lg:w-1/2 w-full p-6 sm:p-8 flex flex-col items-start min-h-full"
-        initial={{ opacity: 0, x: 100 }}
+        initial={{ opacity: 0, x: 100 }} // Animation d'entrée avec opacité 0 et décalage horizontal
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
       >
         <h2 className="text-2xl lg:text-4xl font-bold text-[#1E3A8A] dark:text-[#1E3A8A] mb-4 flex items-center gap-2">
           React JS
@@ -79,6 +82,8 @@ const BestCourses = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.4 }}
+            whileInView={{ opacity: 1, y: 0 }} // L'élément devient visible lors du scroll
+            viewport={{ once: true }}
           >
             <Button
               onClick={handleDownload}
@@ -96,6 +101,8 @@ const BestCourses = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.6 }}
+            whileInView={{ opacity: 1, y: 0 }} // L'élément devient visible lors du scroll
+            viewport={{ once: true }}
           >
             <Button
               onClick={() => alert("Cours ouvert !")}
